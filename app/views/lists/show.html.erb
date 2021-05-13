@@ -1,0 +1,17 @@
+<div class='container'>
+  <div class="row justify-content-center">
+    <div class="row col-12 col-md-8 col-lg-6 pt-3" id="list_card">
+      <h2><%= @list.name %></h2>
+      <%= link_to "Create new list", new_list_path(@list) %>
+      <%= link_to "Create bookmark", new_list_bookmark_path(@list) %>
+      <%= link_to "Back to lists", lists_path %>
+
+      <% @list.bookmarks.each do |bookmark| %>
+          <li class="list-group-item"><%= bookmark.comment %> <%= link_to "Delete",
+            bookmark_path(bookmark),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %></li>
+        <% end %>
+    </div>
+  </div>
+</div>
