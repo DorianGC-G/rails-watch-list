@@ -11,3 +11,17 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+
+
+.gradient-background {
+  border: solid rgba(15, 15, 15, 0.411) 1px;
+  border-radius: 5px;
+  position: absolute;
+  box-shadow:rgba(255, 89, 189, 0.3) -8px 0px 24px, rgba(89,236,255,0.5) 8px 0px 24px;
+}
+
+.btn-form {
+  background: linear-gradient(to right, #ff59bd,#59ecff);
+  border: none;
+}

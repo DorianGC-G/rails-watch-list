@@ -1,7 +1,25 @@
-<h2>Your lists</h2>
-<ul class="list-group">
-  <% @lists.each do |list| %>
-    <li class="list-group-item"><%= link_to list.name, list_path(list) %></li>
-  <% end %>
-</ul>
-<%= link_to "Create new list", new_list_path %>
+<div class='container'>
+  <h2 id="list-title" class="mb-5">Your lists</h2>
+  <div class="list-grid">
+    <% @lists.each do |list| %>
+      <div class="list-card list-group-item"><%= link_to list.name, list_path(list) %>
+      </div>
+    <% end %>
+  </div>
+    <%= link_to "Create new list", new_list_path, class: 'btn-secondary btn m-2'%>
+</div>
+
+<style>
+#list-title {
+  text-align: center;
+}
+
+.list-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list-card {
+  padding: 4px;
+}
+</style>

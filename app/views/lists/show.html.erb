@@ -1,17 +1,33 @@
 <div class='container'>
-  <div class="row justify-content-center">
-    <div class="row col-12 col-md-8 col-lg-6 pt-3" id="list_card">
+  <div class="justify-content-center">
+    <div class="d-flex flex-column justify-content-center align-items-center py-5">
       <h2><%= @list.name %></h2>
-      <%= link_to "Create new list", new_list_path(@list) %>
-      <%= link_to "Create bookmark", new_list_bookmark_path(@list) %>
-      <%= link_to "Back to lists", lists_path %>
+      <div class="d-flex flex-row flex-wrap justify-content-center align-items-center">
+        <%= link_to "Create new list", new_list_path(@list), class: 'btn-secondary btn m-2' %>
+        <%= link_to "Create bookmark", new_list_bookmark_path(@list), class: 'btn-secondary btn m-2' %>
+        <%= link_to "Back to lists", lists_path, class: 'btn-secondary btn m-2' %>
+      </div>
+    </div>
 
-      <% @list.bookmarks.each do |bookmark| %>
-          <li class="list-group-item"><%= bookmark.comment %> <%= link_to "Delete",
-            bookmark_path(bookmark),
-            method: :delete,
-            data: { confirm: "Are you sure?" } %></li>
-        <% end %>
+    <div class="row my-2">
+      <% @list.movies.each do |movie| %>
+        <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+        <div class="col-12 col-sm-6 mb-4" data-aos="zoom-in">
+          <div class="bg-white rounded shadow h-100">
+            <%= image_tag movie.poster_url, alt: movie.title, class: "movie-img rounded-top", style: 'width: 100%; height: 40vh; object-fit: cover;' %>
+            <div class="p-3 rounded-bottom d-flex flex-column">
+              <strong><%= movie.title %> <span class="text-muted font-weight-normal"> <%= movie.rating %> <i class="fas fa-star star-yellow"></i></span></strong>
+              <small class="text-muted"><%= movie.overview %></small>
+              <div class="d-flex align-items-end justify-content-between pt-4">
+                <div>
+                  <i class="fas fa-quote-left mr-2"></i><small class="flex-grow-1"><%= bookmark.comment %></small>
+                </div>
+                <small class="text-right flex-shrink-0"><%= link_to "delete", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list" }, class: "text-danger" %></small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
